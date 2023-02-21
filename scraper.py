@@ -1,21 +1,22 @@
-from requests_html import HTMLSession
-# from requests_html import AsyncHTMLSession
+# from requests_html import HTMLSession
+from requests_html import AsyncHTMLSession
 
 
 
 
 
 class Scraper:
-	s = HTMLSession()
+	s = AsyncHTMLSession()
+	# s = HTMLSession()
 
-	def homeThumbnail(self,page,filter):
+	async def homeThumbnail(self,page,filter):
 		print('page in scrap',page)
 		if filter == 'RAS':
 			url = f'https://asianembed.io/?page={page}'
 		else:
 			url = f'https://asianembed.io/{filter}?page={page}'
 		print('url',url)
-		r = self.s.get(url)
+		r = await self.s.get(url)
 		try:
 			ul = r.html.find('.listing',first=True)
 			# print(ul.find('.video-block'))
@@ -39,9 +40,9 @@ class Scraper:
 			raise e
 
 
-	def itemDetails(self,item):
+	async def itemDetails(self,item):
 		
-		r = self.s.get(f'https://asianembed.io/videos/{item}')
+		r = await self.s.get(f'https://asianembed.io/videos/{item}')
 		try:
 			videoInfo = r.html.find('.video-info-left',first=True)
 			title = videoInfo.find('h1',first=True).text.strip()
@@ -72,9 +73,9 @@ class Scraper:
 		
 
 
-	def searchResult(self,term,page):
+	async def searchResult(self,term,page):
 
-		r =  self.s.get(f'https://asianembed.io/search.html?keyword={term}&page={page}')
+		r = await self.s.get(f'https://asianembed.io/search.html?keyword={term}&page={page}')
 		ul =r.html.find('.listing',first=True)
 
 		resultInfo=[]

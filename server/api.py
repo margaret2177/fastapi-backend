@@ -25,7 +25,7 @@ origins = [
     # "http://localhost.tiangolo.com",
     # "https://localhost.tiangolo.com",
     "https://asianembed.io",
-    "https://floating-spire-08257.herokuapp.com",
+    "https://fastapi-backend-gfs1ok4ks-margaret2177.vercel.app/",
     "http://localhost:3000"
 
 ]

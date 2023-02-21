@@ -51,16 +51,6 @@ router = APIRouter()
 s = Scraper()
 
 
-notes = {
-    "1": {
-        "title": "My first note",
-        "content": "This is the first note in my notes application"
-    },
-    "2": {
-        "title": "Uniform circular motion.",
-        "content": "Consider a body moving round a circle of radius r, wit uniform speed v as shown below. The speed everywhere is the same as v but direction changes as it moves round the circle."
-    }
-}
 
 @router.get("/")
 async def read_root():
@@ -73,14 +63,14 @@ async def read_home(page:int=1,filter:str='RAS'):
     # print('filter',filter)
    
 
-    return s.homeThumbnail(page,filter)
+    return await s.homeThumbnail(page,filter)
 
 @router.get("/api/details/{path}")
 async def read_details(path:str):
     
-    return s.itemDetails(path)
+    return await s.itemDetails(path)
 
 @router.get("/api/search/{term}")
 async def read_search(term:str,page:int=1):
  
-    return s.searchResult(term,page)
+    return await s.searchResult(term,page)
